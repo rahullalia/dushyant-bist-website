@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dushyant Bist - Mortgage Loan Officer Website
 
-## Getting Started
+Personal website and digital contact card for Dushyant Bist, a licensed Mortgage Loan Officer serving New York State.
 
-First, run the development server:
+**Live Site:** [dushyant-rho.vercel.app](https://dushyant-rho.vercel.app)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## Features
+
+### Landing Page (`/`)
+- Hero section with floating stat badges
+- 10 loan program types (Conventional, FHA, VA, Jumbo, etc.)
+- 5-step loan process timeline
+- Client testimonials
+- FAQ accordion
+- Contact section with call/text/Instagram buttons
+- Sticky navigation on scroll
+
+### Digital Contact Card (`/dushyant`)
+- Shareable contact page for networking
+- One-tap call, text, or Instagram
+- Save contact (vCard download)
+- Share button (native share API)
+
+---
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **Styling:** Tailwind CSS 4
+- **Animations:** Framer Motion
+- **Icons:** Lucide React
+- **Fonts:** Geist Sans/Mono
+- **Hosting:** Vercel
+
+---
+
+## Project Structure
+
+```
+dushyant/
+├── app/
+│   ├── page.tsx           # Landing page
+│   ├── dushyant/page.tsx  # Contact card
+│   ├── layout.tsx         # Root layout + SEO
+│   └── globals.css        # Brand colors, animations
+├── components/
+│   ├── Hero.tsx
+│   ├── Services.tsx
+│   ├── Process.tsx
+│   ├── Testimonials.tsx
+│   ├── FAQ.tsx
+│   ├── Contact.tsx
+│   ├── TrustBar.tsx
+│   ├── Navbar.tsx
+│   └── ui/
+│       ├── Button.tsx
+│       └── Container.tsx
+├── lib/
+│   ├── constants.ts       # All content/data
+│   ├── utils.ts           # Helper functions
+│   └── vcard.ts           # vCard generation
+└── public/
+    └── dushyant.jpeg      # Profile photo
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Development
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Install dependencies
+npm install
 
-## Learn More
+# Start dev server
+npm run dev
 
-To learn more about Next.js, take a look at the following resources:
+# Build for production
+npm run build
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Deploy to Vercel
+vercel --prod
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Content Updates
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+All content is in `lib/constants.ts`:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **CONTACT** - Name, phone, Instagram, SMS message
+- **LOAN_TYPES** - 10 loan program descriptions
+- **TESTIMONIALS** - Client reviews
+- **FAQ_ITEMS** - Common questions and answers
+- **PROCESS_STEPS** - 5-step loan timeline
+- **CREDENTIALS** - NMLS#, experience, ratings
+
+---
+
+## Brand Colors
+
+| Color | Hex | Usage |
+|-------|-----|-------|
+| Background | `#0c0c0c` | Dark theme base |
+| Royal Blue | `#1e3a5f` | Trust, accents |
+| Gold | `#d4a853` | CTAs, highlights |
+| Text | `#f5f5f5` | Primary text |
+
+---
+
+## License
+
+Private project for Dushyant Bist.
