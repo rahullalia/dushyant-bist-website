@@ -41,7 +41,7 @@ export function Contact() {
 
           {/* Text Button */}
           <Button variant="secondary" size="lg" className="w-full justify-center gap-3" asChild>
-            <a href={formatSmsLink(CONTACT.phone)}>
+            <a href={formatSmsLink(CONTACT.phone, CONTACT.smsMessage)}>
               <MessageCircle className="w-5 h-5" />
               Send a Text
             </a>

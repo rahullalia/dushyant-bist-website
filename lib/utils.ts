@@ -18,6 +18,8 @@ export function formatPhoneLink(phone: string): string {
   return `tel:+1${phone.replace(/\D/g, "")}`;
 }
 
-export function formatSmsLink(phone: string): string {
-  return `sms:+1${phone.replace(/\D/g, "")}`;
+export function formatSmsLink(phone: string, message?: string): string {
+  const cleanPhone = phone.replace(/\D/g, "");
+  const body = message ? `?body=${encodeURIComponent(message)}` : "";
+  return `sms:+1${cleanPhone}${body}`;
 }

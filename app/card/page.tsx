@@ -107,7 +107,7 @@ export default function CardPage() {
               {/* Text */}
               <motion.a
                 variants={item}
-                href={formatSmsLink(CONTACT.phone)}
+                href={formatSmsLink(CONTACT.phone, CONTACT.smsMessage)}
                 className="flex items-center gap-4 w-full p-4 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300"
               >
                 <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">

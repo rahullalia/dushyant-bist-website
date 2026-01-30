@@ -7,6 +7,7 @@ export const CONTACT = {
   phoneRaw: "9172004124",
   instagram: "https://www.instagram.com/poweredbydbest/",
   instagramHandle: "@poweredbydbest",
+  smsMessage: "Hi Dushyant! I found you online and I'm interested in learning more about mortgage options.",
 } as const;
 
 export const LOAN_TYPES = [
