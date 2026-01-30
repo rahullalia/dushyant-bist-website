@@ -10,42 +10,51 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "primary", size = "md", children, ...props }, ref) => {
+  ({ className, variant = "primary", size = "md", asChild, children, ...props }, ref) => {
+    const classes = cn(
+      // Base styles
+      "inline-flex items-center justify-center font-medium rounded-xl",
+      "transition-all duration-300 ease-out",
+      "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a853] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0c0c0c]",
+      "disabled:opacity-50 disabled:cursor-not-allowed",
+      "active:scale-[0.98]",
+      {
+        // Primary: Gold gradient
+        "bg-gradient-to-r from-[#d4a853] to-[#e8c87a] text-[#0c0c0c] font-semibold shadow-lg shadow-[#d4a853]/20 hover:shadow-[#d4a853]/30 hover:shadow-xl":
+          variant === "primary",
+        // Secondary: Glass with blue tint
+        "bg-[#1e3a5f]/30 text-white/90 backdrop-blur-sm border border-[#1e3a5f]/50 hover:bg-[#1e3a5f]/50 hover:border-[#d4a853]/30":
+          variant === "secondary",
+        // Outline: Gold border
+        "border border-[#d4a853]/40 text-[#d4a853] hover:bg-[#d4a853]/10 hover:border-[#d4a853]/60":
+          variant === "outline",
+        // Ghost: Minimal
+        "text-white/70 hover:text-white hover:bg-white/5":
+          variant === "ghost",
+        // Sizes
+        "px-4 py-2.5 text-sm gap-2": size === "sm",
+        "px-6 py-3 text-base gap-2.5": size === "md",
+        "px-8 py-4 text-lg gap-3": size === "lg",
+      },
+      className
+    );
+
+    // If asChild, clone the child element with button styles
+    if (asChild && children) {
+      const child = children as React.ReactElement<{ className?: string }>;
+      return (
+        <child.type {...(child.props as object)} className={cn(classes, child.props.className)} />
+      );
+    }
+
     return (
-      <button
-        className={cn(
-          "relative inline-flex items-center justify-center font-medium rounded-xl transition-all duration-300",
-          "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]",
-          "disabled:opacity-50 disabled:cursor-not-allowed",
-          "active:scale-[0.98]",
-          {
-            // Primary - Gradient with glow
-            "bg-gradient-to-r from-sky-500 to-teal-500 text-white hover:from-sky-400 hover:to-teal-400 focus-visible:ring-sky-500 shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 hover:shadow-xl":
-              variant === "primary",
-            // Secondary - Glass effect
-            "bg-white/5 text-white hover:bg-white/10 focus-visible:ring-white/50 backdrop-blur-sm border border-white/10 hover:border-white/20":
-              variant === "secondary",
-            // Outline - Border only
-            "border border-white/20 text-white hover:bg-white/5 hover:border-white/40 focus-visible:ring-white/50":
-              variant === "outline",
-            // Ghost - Minimal
-            "text-white/70 hover:text-white hover:bg-white/5 focus-visible:ring-white/50":
-              variant === "ghost",
-            // Sizes
-            "px-4 py-2.5 text-sm gap-2": size === "sm",
-            "px-6 py-3 text-base gap-2.5": size === "md",
-            "px-8 py-4 text-lg gap-3": size === "lg",
-          },
-          className
-        )}
-        ref={ref}
-        {...props}
-      >
+      <button className={classes} ref={ref} {...props}>
         {children}
       </button>
     );
   }
 );
+
 Button.displayName = "Button";
 
 export { Button };

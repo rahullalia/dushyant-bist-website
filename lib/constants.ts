@@ -2,25 +2,36 @@ export const CONTACT = {
   name: "Dushyant Bist",
   firstName: "Dushyant",
   lastName: "Bist",
-  title: "NY Mortgage Loan Officer",
+  title: "Mortgage Loan Officer",
+  subtitle: "New York State",
   phone: "(917) 200-4124",
   phoneRaw: "9172004124",
   instagram: "https://www.instagram.com/poweredbydbest/",
   instagramHandle: "@poweredbydbest",
-  smsMessage: "Hi Dushyant! I found you online and I'm interested in learning more about mortgage options.",
+  smsMessage: "Hi Dushyant! I found your website and would love to chat about mortgage options.",
+  location: "New York State",
 } as const;
 
 export const LOAN_TYPES = [
-  { name: "Conventional", description: "Traditional financing with competitive rates" },
-  { name: "FHA", description: "Low down payment options for first-time buyers" },
-  { name: "VA", description: "Zero down payment for veterans and active military" },
-  { name: "Jumbo", description: "Financing for high-value properties" },
-  { name: "Non-QM", description: "Flexible options for self-employed and unique situations" },
-  { name: "DSCR", description: "Investment property loans based on rental income" },
-  { name: "Mixed-Use", description: "Commercial and residential property financing" },
-  { name: "Multifamily", description: "Apartment buildings and multi-unit properties" },
-  { name: "Fix-and-Flip", description: "Short-term financing for property investors" },
-  { name: "Bridge Loans", description: "Fast funding to close deals quickly" },
+  { name: "Conventional", description: "Competitive rates for qualified buyers" },
+  { name: "FHA", description: "Low down payment, first-time buyer friendly" },
+  { name: "VA", description: "Zero down for veterans and military" },
+  { name: "Jumbo", description: "Financing for high-value homes" },
+  { name: "Non-QM", description: "Flexible options for unique situations" },
+  { name: "DSCR", description: "Investment loans based on rental income" },
+  { name: "Mixed-Use", description: "Commercial and residential combined" },
+  { name: "Multifamily", description: "Apartment and multi-unit properties" },
+  { name: "Fix & Flip", description: "Short-term funding for investors" },
+  { name: "Bridge", description: "Fast funding to close deals quickly" },
 ] as const;
 
-export const ABOUT_TEXT = `As a New York State Mortgage Loan Officer, I help people make smart moves with their money—whether they're buying a home, investing in property, or need fast funding to get a deal done. I work with residential, commercial, and hard money loans, and break everything down in plain language. My goal: finding the right solution and helping you close with confidence.`;
+export const ABOUT_TEXT = `I help people across New York make smart decisions with their money. Whether you're buying your first home, investing in property, or need quick funding to close a deal, I'll find the right loan for your situation. I work with residential, commercial, and hard money loans, and I keep things simple. No jargon, no runaround. Just honest advice and a smooth path to closing.`;
+
+export const TAGLINE = "Your trusted partner for home loans in New York";
+
+export const VALUE_PROPS = [
+  "Clear communication, no surprises",
+  "Fast pre-approvals",
+  "Competitive rates",
+  "Available 7 days a week",
+] as const;
