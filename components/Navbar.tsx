@@ -37,7 +37,7 @@ export function Navbar() {
         className="fixed top-0 left-0 right-0 z-50"
       >
         <div className="mx-4 mt-4">
-          <nav className="max-w-6xl mx-auto glass-card px-4 md:px-6 py-3">
+          <nav className="max-w-6xl mx-auto bg-[#050505]/95 backdrop-blur-md border border-white/10 rounded-2xl px-4 md:px-6 py-3">
             <div className="flex items-center justify-between">
               {/* Logo */}
               <a href="#" className="font-bold text-lg gradient-text">
@@ -110,7 +110,7 @@ export function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="absolute right-0 top-0 bottom-0 w-[280px] bg-[#0c0c0c] border-l border-white/10 p-6"
+              className="absolute right-0 top-0 bottom-0 w-[280px] bg-[#050505] border-l border-white/10 p-6"
             >
               <div className="flex flex-col h-full">
                 {/* Close Button */}

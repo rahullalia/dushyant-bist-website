@@ -25,7 +25,7 @@ export function Testimonials() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="inline-block px-5 py-2 rounded-full text-sm font-medium uppercase tracking-wider text-[#d4a853] bg-[#d4a853]/10 border border-[#d4a853]/20 mb-6">
+          <span className="inline-block px-5 py-2 rounded-full text-sm font-medium uppercase tracking-wider text-[#b8860b] bg-[#b8860b]/10 border border-[#b8860b]/20 mb-6">
             Client Stories
           </span>
           <h2 className="text-4xl md:text-5xl font-bold">
@@ -47,12 +47,12 @@ export function Testimonials() {
               className="glass-card p-6 md:p-8 relative group"
             >
               {/* Quote Icon */}
-              <Quote className="absolute top-6 right-6 w-8 h-8 text-[#d4a853]/20 group-hover:text-[#d4a853]/40 transition-colors" />
+              <Quote className="absolute top-6 right-6 w-8 h-8 text-[#b8860b]/20 group-hover:text-[#b8860b]/40 transition-colors" />
 
               {/* Stars */}
               <div className="flex gap-1 mb-4">
                 {Array.from({ length: testimonial.rating }).map((_, i) => (
-                  <Star key={i} className="w-4 h-4 text-[#d4a853] fill-[#d4a853]" />
+                  <Star key={i} className="w-4 h-4 text-[#b8860b] fill-[#b8860b]" />
                 ))}
               </div>
 
@@ -67,7 +67,7 @@ export function Testimonials() {
                 <div className="flex items-center gap-2 mt-1">
                   <span className="text-sm text-white/40">{testimonial.location}</span>
                   <span className="text-white/20">·</span>
-                  <span className="text-sm text-[#d4a853]/70">{testimonial.type}</span>
+                  <span className="text-sm text-[#b8860b]/70">{testimonial.type}</span>
                 </div>
               </div>
             </motion.div>
@@ -84,7 +84,7 @@ export function Testimonials() {
           <div className="flex items-center gap-2">
             <div className="flex -space-x-1">
               {[1, 2, 3, 4, 5].map((i) => (
-                <Star key={i} className="w-4 h-4 text-[#d4a853] fill-[#d4a853]" />
+                <Star key={i} className="w-4 h-4 text-[#b8860b] fill-[#b8860b]" />
               ))}
             </div>
             <span className="text-sm">4.9 average rating</span>

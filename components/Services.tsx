@@ -32,9 +32,54 @@ const bestFor = [
   "Short-term financing needs",
 ];
 
+// Stagger container for cards
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.06,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+// Individual card animation
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    y: 40,
+    scale: 0.95,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "spring" as const,
+      stiffness: 100,
+      damping: 15,
+    },
+  },
+};
+
+// Header animation
+const headerVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring" as const,
+      stiffness: 100,
+      damping: 20,
+    },
+  },
+};
+
 export function Services() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
     <section id="services" className="relative py-24 md:py-32">
@@ -46,14 +91,19 @@ export function Services() {
         {/* Header */}
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={headerVariants}
           className="text-center mb-16"
         >
-          <span className="inline-block px-5 py-2 rounded-full text-sm font-medium uppercase tracking-wider text-[#d4a853] bg-[#d4a853]/10 border border-[#d4a853]/20 mb-6">
+          <motion.span
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ delay: 0.1 }}
+            className="inline-block px-5 py-2 rounded-full text-sm font-medium uppercase tracking-wider text-[#b8860b] bg-[#b8860b]/10 border border-[#b8860b]/20 mb-6"
+          >
             Loan Programs
-          </span>
+          </motion.span>
           <h2 className="text-4xl md:text-5xl font-bold">
             <span className="gradient-text">Find the Right Loan</span>
           </h2>
@@ -62,56 +112,78 @@ export function Services() {
           </p>
         </motion.div>
 
-        {/* Grid - 3 columns on desktop */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        {/* Flex layout - centers incomplete rows */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="flex flex-wrap justify-center gap-4 md:gap-6"
+        >
           {LOAN_TYPES.map((loan, index) => {
             const Icon = icons[index];
             return (
               <motion.div
                 key={loan.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                whileHover={{ y: -6, scale: 1.02 }}
-                className="glass-card p-6 md:p-8 group cursor-default"
+                variants={cardVariants}
+                whileHover={{
+                  y: -8,
+                  scale: 1.02,
+                  transition: {
+                    type: "spring",
+                    stiffness: 400,
+                    damping: 25,
+                  },
+                }}
+                className="glass-card p-6 md:p-8 group cursor-default w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
               >
                 <div className="flex flex-col">
                   {/* Icon */}
-                  <div className="w-14 h-14 rounded-xl bg-[#1e3a5f]/30 border border-[#1e3a5f]/50 flex items-center justify-center mb-5 group-hover:border-[#d4a853]/40 group-hover:bg-[#d4a853]/10 transition-all duration-300">
-                    <Icon className="w-6 h-6 text-[#d4a853]" />
-                  </div>
+                  <motion.div
+                    whileHover={{ rotate: 5, scale: 1.1 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                    className="w-14 h-14 rounded-xl bg-[#0c2340]/30 border border-[#0c2340]/50 flex items-center justify-center mb-5 group-hover:border-[#b8860b]/40 group-hover:bg-[#b8860b]/10 transition-all duration-300"
+                  >
+                    <Icon className="w-6 h-6 text-[#b8860b]" />
+                  </motion.div>
 
                   {/* Content */}
                   <h3 className="font-bold text-white text-lg mb-2">{loan.name}</h3>
                   <p className="text-sm text-white/50 leading-relaxed mb-3">
                     {loan.description}
                   </p>
-                  <p className="text-xs text-[#d4a853]/70 mt-auto">
+                  <p className="text-xs text-[#b8860b]/70 mt-auto">
                     Best for: {bestFor[index]}
                   </p>
                 </div>
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* CTA */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.6 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.8 }}
           className="mt-16 text-center"
         >
           <p className="text-base text-white/40 mb-4">
             Not sure which loan fits your situation?
           </p>
-          <a
+          <motion.a
             href="#contact"
-            className="inline-flex items-center gap-2 text-[#d4a853] hover:text-[#e8c87a] transition-colors font-medium"
+            whileHover={{ x: 5 }}
+            className="inline-flex items-center gap-2 text-[#b8860b] hover:text-[#d4a62a] transition-colors font-medium"
           >
             Let&apos;s figure it out together
-            <span className="text-lg">→</span>
-          </a>
+            <motion.span
+              animate={{ x: [0, 5, 0] }}
+              transition={{ repeat: Infinity, duration: 1.5 }}
+              className="text-lg"
+            >
+              →
+            </motion.span>
+          </motion.a>
         </motion.div>
       </Container>
     </section>

@@ -60,11 +60,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta name="theme-color" content="#0c0c0c" />
+        <meta name="theme-color" content="#050505" />
         <meta name="format-detection" content="telephone=yes" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#0c0c0c] text-[#f5f5f5] min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#050505] text-white/95 min-h-screen`}
       >
         {/* Ambient Background */}
         <div className="ambient-bg" />

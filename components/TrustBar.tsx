@@ -49,7 +49,7 @@ export function TrustBar() {
                 transition={{ duration: 0.4, delay: index * 0.1 }}
                 className="flex items-center gap-2 text-white/40"
               >
-                <Icon className="w-4 h-4 text-[#d4a853]/60" />
+                <Icon className="w-4 h-4 text-[#b8860b]/60" />
                 <span className="text-sm">{item.label}</span>
               </motion.div>
             );

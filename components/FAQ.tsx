@@ -6,6 +6,65 @@ import { Container } from "@/components/ui/Container";
 import { FAQ_ITEMS } from "@/lib/constants";
 import { ChevronDown, HelpCircle } from "lucide-react";
 
+// Animation variants
+const headerVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring" as const,
+      stiffness: 100,
+      damping: 20,
+    },
+  },
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20, scale: 0.98 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "spring" as const,
+      stiffness: 100,
+      damping: 15,
+    },
+  },
+};
+
+// Smooth accordion animation
+const accordionVariants = {
+  collapsed: {
+    height: 0,
+    opacity: 0,
+    transition: {
+      height: { duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] as const },
+      opacity: { duration: 0.2 },
+    },
+  },
+  expanded: {
+    height: "auto",
+    opacity: 1,
+    transition: {
+      height: { duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] as const },
+      opacity: { duration: 0.3, delay: 0.1 },
+    },
+  },
+};
+
 export function FAQ() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -20,14 +79,19 @@ export function FAQ() {
         {/* Header */}
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={headerVariants}
           className="text-center mb-16"
         >
-          <span className="inline-block px-5 py-2 rounded-full text-sm font-medium uppercase tracking-wider text-[#d4a853] bg-[#d4a853]/10 border border-[#d4a853]/20 mb-6">
+          <motion.span
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ delay: 0.1 }}
+            className="inline-block px-5 py-2 rounded-full text-sm font-medium uppercase tracking-wider text-[#b8860b] bg-[#b8860b]/10 border border-[#b8860b]/20 mb-6"
+          >
             Questions & Answers
-          </span>
+          </motion.span>
           <h2 className="text-4xl md:text-5xl font-bold">
             <span className="gradient-text">Common Questions</span>
           </h2>
@@ -37,68 +101,94 @@ export function FAQ() {
         </motion.div>
 
         {/* FAQ Accordion */}
-        <div className="space-y-4">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="space-y-4"
+        >
           {FAQ_ITEMS.map((item, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: 0.1 + index * 0.05 }}
+              variants={itemVariants}
               className="glass-card overflow-hidden"
             >
-              <button
+              <motion.button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full p-5 md:p-6 flex items-center justify-between gap-4 text-left hover:bg-white/5 transition-colors"
+                whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.05)" }}
+                className="w-full p-5 md:p-6 flex items-center justify-between gap-4 text-left transition-colors"
                 aria-expanded={openIndex === index}
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-[#1e3a5f]/30 border border-[#1e3a5f]/50 flex items-center justify-center shrink-0">
-                    <HelpCircle className="w-5 h-5 text-[#d4a853]" />
-                  </div>
+                  <motion.div
+                    animate={{
+                      backgroundColor: openIndex === index ? "rgba(184, 134, 11, 0.2)" : "rgba(12, 35, 64, 0.3)",
+                      borderColor: openIndex === index ? "rgba(184, 134, 11, 0.4)" : "rgba(12, 35, 64, 0.5)",
+                    }}
+                    transition={{ duration: 0.3 }}
+                    className="w-10 h-10 rounded-lg border flex items-center justify-center shrink-0"
+                  >
+                    <HelpCircle className="w-5 h-5 text-[#b8860b]" />
+                  </motion.div>
                   <span className="font-semibold text-white">{item.question}</span>
                 </div>
-                <ChevronDown
-                  className={`w-5 h-5 text-[#d4a853] shrink-0 transition-transform duration-300 ${
-                    openIndex === index ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
+                <motion.div
+                  animate={{ rotate: openIndex === index ? 180 : 0 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                >
+                  <ChevronDown className="w-5 h-5 text-[#b8860b] shrink-0" />
+                </motion.div>
+              </motion.button>
 
               <AnimatePresence initial={false}>
                 {openIndex === index && (
                   <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    key="content"
+                    initial="collapsed"
+                    animate="expanded"
+                    exit="collapsed"
+                    variants={accordionVariants}
+                    className="overflow-hidden"
                   >
-                    <div className="px-5 md:px-6 pb-5 md:pb-6 pt-0">
+                    <motion.div
+                      initial={{ y: -10 }}
+                      animate={{ y: 0 }}
+                      exit={{ y: -10 }}
+                      transition={{ duration: 0.3 }}
+                      className="px-5 md:px-6 pb-5 md:pb-6 pt-0"
+                    >
                       <div className="pl-14 text-white/60 leading-relaxed">
                         {item.answer}
                       </div>
-                    </div>
+                    </motion.div>
                   </motion.div>
                 )}
               </AnimatePresence>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* CTA */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.6 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.8 }}
           className="mt-12 text-center"
         >
           <p className="text-white/40 mb-4">Have a question not listed here?</p>
-          <a
+          <motion.a
             href="#contact"
-            className="inline-flex items-center gap-2 text-[#d4a853] hover:text-[#e8c87a] transition-colors font-medium"
+            whileHover={{ x: 5 }}
+            className="inline-flex items-center gap-2 text-[#b8860b] hover:text-[#d4a62a] transition-colors font-medium"
           >
             Let&apos;s talk about it
-            <span>→</span>
-          </a>
+            <motion.span
+              animate={{ x: [0, 5, 0] }}
+              transition={{ repeat: Infinity, duration: 1.5 }}
+            >
+              →
+            </motion.span>
+          </motion.a>
         </motion.div>
       </Container>
     </section>

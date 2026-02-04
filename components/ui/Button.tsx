@@ -15,18 +15,18 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       // Base styles
       "inline-flex items-center justify-center font-medium rounded-xl",
       "transition-all duration-300 ease-out",
-      "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a853] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0c0c0c]",
+      "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#b8860b] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]",
       "disabled:opacity-50 disabled:cursor-not-allowed",
       "active:scale-[0.98]",
       {
         // Primary: Gold gradient
-        "bg-gradient-to-r from-[#d4a853] to-[#e8c87a] text-[#0c0c0c] font-semibold shadow-lg shadow-[#d4a853]/20 hover:shadow-[#d4a853]/30 hover:shadow-xl":
+        "bg-gradient-to-r from-[#b8860b] to-[#d4a62a] text-[#050505] font-semibold shadow-lg shadow-[#b8860b]/20 hover:shadow-[#b8860b]/30 hover:shadow-xl":
           variant === "primary",
         // Secondary: Glass with blue tint
-        "bg-[#1e3a5f]/30 text-white/90 backdrop-blur-sm border border-[#1e3a5f]/50 hover:bg-[#1e3a5f]/50 hover:border-[#d4a853]/30":
+        "bg-[#0c2340]/30 text-white/90 backdrop-blur-sm border border-[#0c2340]/50 hover:bg-[#0c2340]/50 hover:border-[#b8860b]/30":
           variant === "secondary",
         // Outline: Gold border
-        "border border-[#d4a853]/40 text-[#d4a853] hover:bg-[#d4a853]/10 hover:border-[#d4a853]/60":
+        "border border-[#b8860b]/40 text-[#b8860b] hover:bg-[#b8860b]/10 hover:border-[#b8860b]/60":
           variant === "outline",
         // Ghost: Minimal
         "text-white/70 hover:text-white hover:bg-white/5":

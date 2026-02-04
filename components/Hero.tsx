@@ -1,36 +1,74 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { CONTACT, ABOUT_TEXT, VALUE_PROPS, STATS } from "@/lib/constants";
 import { Check, Star } from "lucide-react";
+import { useRef } from "react";
+
+// Spring physics for natural motion
+const springTransition = {
+  type: "spring" as const,
+  stiffness: 100,
+  damping: 20,
+};
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 30 },
   visible: (delay: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, delay, ease: "easeOut" as const },
+    transition: {
+      type: "spring" as const,
+      stiffness: 100,
+      damping: 20,
+      delay,
+    },
   }),
 };
 
-const floatIn = {
+const scaleIn = {
   hidden: { opacity: 0, scale: 0.8 },
   visible: (delay: number) => ({
     opacity: 1,
     scale: 1,
-    transition: { duration: 0.5, delay, ease: "easeOut" as const },
+    transition: {
+      type: "spring" as const,
+      stiffness: 200,
+      damping: 20,
+      delay,
+    },
   }),
 };
 
 export function Hero() {
+  const containerRef = useRef<HTMLElement>(null);
+
+  // Parallax scroll effect for orbs
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  // Transform scroll progress to parallax movement
+  const orbBlueY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const orbGoldY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const orbBlueX = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]);
+  const orbGoldX = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+
   return (
-    <section className="relative min-h-screen flex items-center py-24 md:py-32">
-      {/* Background Elements */}
-      <div className="orb orb-blue w-[600px] h-[600px] -top-40 -left-40 animate-pulse-soft" />
-      <div className="orb orb-gold w-[500px] h-[500px] bottom-20 -right-40 animate-pulse-soft" style={{ animationDelay: "2s" }} />
+    <section ref={containerRef} className="relative min-h-screen flex items-center py-24 md:py-32 overflow-hidden">
+      {/* Parallax Background Orbs */}
+      <motion.div
+        style={{ y: orbBlueY, x: orbBlueX }}
+        className="orb orb-blue w-[600px] h-[600px] -top-40 -left-40 animate-pulse-soft"
+      />
+      <motion.div
+        style={{ y: orbGoldY, x: orbGoldX }}
+        className="orb orb-gold w-[500px] h-[500px] bottom-20 -right-40 animate-pulse-soft"
+      />
       <div className="absolute inset-0 grid-bg opacity-40" />
 
       <Container size="lg" className="relative z-10">
@@ -39,8 +77,8 @@ export function Hero() {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="relative mb-10"
+            transition={springTransition}
+            className="relative mb-24"
           >
             {/* Floating Stats - Desktop */}
             <div className="hidden md:block">
@@ -49,8 +87,9 @@ export function Hero() {
                 custom={0.3}
                 initial="hidden"
                 animate="visible"
-                variants={floatIn}
-                className="absolute -left-32 top-1/2 -translate-y-1/2 glass-card px-4 py-3 text-center"
+                variants={scaleIn}
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="absolute -left-32 top-1/2 -translate-y-1/2 glass-card px-4 py-3 text-center cursor-default"
               >
                 <p className="text-2xl font-bold gradient-text">{STATS[0].value}</p>
                 <p className="text-xs text-white/50">{STATS[0].label}</p>
@@ -61,11 +100,12 @@ export function Hero() {
                 custom={0.4}
                 initial="hidden"
                 animate="visible"
-                variants={floatIn}
-                className="absolute -right-32 top-1/2 -translate-y-1/2 glass-card px-4 py-3 text-center"
+                variants={scaleIn}
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="absolute -right-32 top-1/2 -translate-y-1/2 glass-card px-4 py-3 text-center cursor-default"
               >
                 <div className="flex items-center justify-center gap-1">
-                  <Star className="w-4 h-4 text-[#d4a853] fill-[#d4a853]" />
+                  <Star className="w-4 h-4 text-[#b8860b] fill-[#b8860b]" />
                   <p className="text-2xl font-bold gradient-text">{STATS[1].value}</p>
                 </div>
                 <p className="text-xs text-white/50">{STATS[1].label}</p>
@@ -76,24 +116,29 @@ export function Hero() {
                 custom={0.5}
                 initial="hidden"
                 animate="visible"
-                variants={floatIn}
-                className="absolute -bottom-4 left-1/2 -translate-x-1/2 glass-card px-4 py-2 text-center"
+                variants={scaleIn}
+                whileHover={{ scale: 1.05 }}
+                className="absolute -bottom-20 left-1/2 -translate-x-1/2 glass-card px-4 py-2 text-center cursor-default"
               >
-                <p className="text-sm font-semibold text-[#d4a853]">{STATS[2].value} Years Experience</p>
+                <p className="text-sm font-semibold text-[#b8860b]">{STATS[2].value} Years Experience</p>
               </motion.div>
             </div>
 
             {/* Profile Image */}
-            <div className="relative w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden gradient-border glow-strong">
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              transition={springTransition}
+              className="relative w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden gradient-border glow-strong"
+            >
               <Image
                 src="/dushyant.jpeg"
                 alt={CONTACT.name}
                 width={224}
                 height={224}
                 priority
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-top"
               />
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* Mobile Stats Row */}
@@ -105,10 +150,16 @@ export function Hero() {
             className="flex md:hidden gap-4 mb-6"
           >
             {STATS.map((stat, index) => (
-              <div key={stat.label} className="glass-card px-4 py-2 text-center">
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3 + index * 0.1, ...springTransition }}
+                className="glass-card px-4 py-2 text-center"
+              >
                 <p className="text-lg font-bold gradient-text">{stat.value}</p>
                 <p className="text-[10px] text-white/50">{stat.label}</p>
-              </div>
+              </motion.div>
             ))}
           </motion.div>
 
@@ -129,7 +180,7 @@ export function Hero() {
             initial="hidden"
             animate="visible"
             variants={fadeUp}
-            className="mt-4 text-xl md:text-2xl text-[#d4a853]"
+            className="mt-4 text-xl md:text-2xl text-[#b8860b]"
           >
             {CONTACT.title} · {CONTACT.subtitle}
           </motion.p>
@@ -153,11 +204,17 @@ export function Hero() {
             variants={fadeUp}
             className="mt-10 flex flex-wrap justify-center gap-x-8 gap-y-3"
           >
-            {VALUE_PROPS.map((prop) => (
-              <div key={prop} className="flex items-center gap-2 text-sm md:text-base text-white/50">
-                <Check className="w-5 h-5 text-[#d4a853]" />
+            {VALUE_PROPS.map((prop, index) => (
+              <motion.div
+                key={prop}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.5 + index * 0.1 }}
+                className="flex items-center gap-2 text-sm md:text-base text-white/50"
+              >
+                <Check className="w-5 h-5 text-[#b8860b]" />
                 <span>{prop}</span>
-              </div>
+              </motion.div>
             ))}
           </motion.div>
 
@@ -170,10 +227,22 @@ export function Hero() {
             className="mt-12 flex flex-col sm:flex-row gap-4"
           >
             <Button size="lg" className="shimmer text-base px-8 py-4" asChild>
-              <a href="#contact">Get in Touch</a>
+              <motion.a
+                href="#contact"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Get in Touch
+              </motion.a>
             </Button>
             <Button variant="outline" size="lg" className="text-base px-8 py-4" asChild>
-              <a href="#services">View Loan Options</a>
+              <motion.a
+                href="#services"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                View Loan Options
+              </motion.a>
             </Button>
           </motion.div>
         </div>
