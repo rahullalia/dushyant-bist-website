@@ -28,12 +28,12 @@ MCP integrations (Notion, Google Calendar, Google Drive) are configured at syste
 
 ## Brand & Design
 
-**Color Scheme:** Royal Blue (#1e3a5f) + Gold (#d4a853)
+**Color Scheme:** Royal Blue (#0c2340) + Gold (#b8860b)
 - Royal Blue = Trust, stability, professionalism
-- Gold = Wealth, success, premium feel
+- Gold = Wealth, success, premium feel (warmer, less saturated)
 
 **Aesthetic:**
-- Dark theme (#0c0c0c background)
+- Dark theme (#050505 background - deeper black)
 - Glassmorphism cards (backdrop-blur, translucent borders)
 - Floating orb animations
 - Smooth Framer Motion transitions
@@ -106,6 +106,23 @@ vercel --prod    # Deploy to Vercel
 
 ## Session Log
 
+### 2026-02-03: UI Bug Fixes & Polish
+
+**Issues Fixed:**
+1. **Sticky header merging with content** - Removed `glass-card` class from Navbar, replaced with solid `bg-[#0c0c0c]/95` background + `backdrop-blur-md` for readability
+2. **Services cards not centered when odd number** - Changed CSS Grid to Flexbox with `justify-center` and responsive width classes
+3. **"Experience" label overlapping image** - Moved from `-bottom-4` to `-bottom-20` and increased container margin to `mb-24`
+4. **Profile image cropping** - Added `object-top` to show face instead of center-crop
+
+**Files Modified:**
+- `components/Navbar.tsx` - Solid background instead of glass-card
+- `components/Services.tsx` - Flexbox layout with `w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]`
+- `components/Hero.tsx` - Experience label positioning, image alignment, container margin
+
+**SOP Created:** `~/.claude/docs/mortgageLenderWebsiteSOP.md` - Comprehensive 8-section guide for building mortgage lender websites
+
+---
+
 ### 2026-01-30: Major Website Enhancement
 
 **Completed:**
@@ -133,3 +150,41 @@ vercel --prod    # Deploy to Vercel
 2. Collect real testimonials or confirm placeholders are OK
 3. Verify stats are acceptable or get real numbers
 4. Consider adding email to vCard if Dushyant provides one
+
+---
+
+### 2026-02-04: Color Scheme Overhaul (Rmit Palette)
+
+**Changes Made:**
+Reworked entire color scheme to match Rmit's more refined palette:
+
+| Element | Old | New |
+|---------|-----|-----|
+| Background | `#0c0c0c` | `#050505` (deeper black) |
+| Navy | `#1e3a5f` | `#0c2340` (deeper) |
+| Navy Light | `#2d5a8a` | `#1a3a5c` |
+| Gold | `#d4a853` (bright) | `#b8860b` (warmer, natural) |
+| Gold Light | `#e8c87a` | `#d4a62a` |
+| Borders | Gold-based RGBA | White-based RGBA (`rgba(255,255,255,0.06)`) |
+
+**Files Modified (13 files):**
+- `app/globals.css` - CSS variables, glassmorphism, glow effects, ambient bg, orbs, scrollbar, selection
+- `app/layout.tsx` - Theme color meta, body bg/text
+- `app/dushyant/page.tsx` - Header gradient, borders, gold accents, image positioning
+- `components/Navbar.tsx` - Nav/mobile menu backgrounds
+- `components/ui/Button.tsx` - All button variants
+- `components/Hero.tsx` - Gold accents
+- `components/Services.tsx` - Badge, icons, hover states
+- `components/Process.tsx` - Timeline gradient, step circles, icons, CTA
+- `components/FAQ.tsx` - Badge, accordion icons
+- `components/Contact.tsx` - Badge, icons, borders
+- `components/Testimonials.tsx` - Badge, stars
+- `components/TrustBar.tsx` - Icons
+- `components/ScrollProgress.tsx` - Progress bar gradient
+
+**Card Page Image Fix:**
+- Added `object-[center_0%]` for top-center alignment
+- Added `scale-[1.2]` for 20% zoom
+- Added `origin-top` to preserve head visibility
+
+**Deployed:** https://dushyant-rho.vercel.app

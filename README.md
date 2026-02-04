@@ -19,9 +19,16 @@ Personal website and digital contact card for Dushyant Bist, a licensed Mortgage
 
 ### Digital Contact Card (`/dushyant`)
 - Shareable contact page for networking
-- One-tap call, text, or Instagram
+- One-tap call, text, email, or Instagram
+- Website link button
 - Save contact (vCard download)
 - Share button (native share API)
+- "View Full Website" link
+
+### Global Features
+- Scroll progress indicator bar
+- Parallax background orbs
+- Spring physics animations
 
 ---
 
@@ -54,6 +61,7 @@ dushyant/
 │   ├── Contact.tsx
 │   ├── TrustBar.tsx
 │   ├── Navbar.tsx
+│   ├── ScrollProgress.tsx
 │   └── ui/
 │       ├── Button.tsx
 │       └── Container.tsx
@@ -102,10 +110,13 @@ All content is in `lib/constants.ts`:
 
 | Color | Hex | Usage |
 |-------|-----|-------|
-| Background | `#0c0c0c` | Dark theme base |
-| Royal Blue | `#1e3a5f` | Trust, accents |
-| Gold | `#d4a853` | CTAs, highlights |
-| Text | `#f5f5f5` | Primary text |
+| Background | `#050505` | Deep black base |
+| Royal Blue | `#0c2340` | Trust, accents |
+| Gold | `#b8860b` | CTAs, highlights (warm natural) |
+| Gold Light | `#d4a62a` | Gradients |
+| Text | `rgba(255,255,255,0.95)` | Primary text |
+| Text Muted | `rgba(255,255,255,0.50)` | Secondary text |
+| Borders | `rgba(255,255,255,0.06)` | Subtle borders |
 
 ---
 
