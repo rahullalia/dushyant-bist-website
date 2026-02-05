@@ -82,10 +82,10 @@ export function Services() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="services" className="relative py-24 md:py-32">
+    <section id="services" className="relative py-24 md:py-32 overflow-hidden">
       {/* Background */}
-      <div className="orb orb-gold w-[400px] h-[400px] -right-40 top-1/4 animate-pulse-soft" />
-      <div className="orb orb-blue w-[300px] h-[300px] -left-32 bottom-1/4 animate-pulse-soft" style={{ animationDelay: "1.5s" }} />
+      <div className="orb orb-gold w-[400px] h-[400px] -right-40 top-1/4 animate-pulse-soft hidden md:block" />
+      <div className="orb orb-blue w-[300px] h-[300px] -left-32 bottom-1/4 animate-pulse-soft hidden md:block" style={{ animationDelay: "1.5s" }} />
 
       <Container className="relative z-10">
         {/* Header */}

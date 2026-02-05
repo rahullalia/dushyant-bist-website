@@ -78,10 +78,10 @@ export function Contact() {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section id="contact" className="relative py-24 md:py-32">
+    <section id="contact" className="relative py-24 md:py-32 overflow-hidden">
       {/* Background */}
-      <div className="orb orb-blue w-[500px] h-[500px] -left-40 top-1/4 animate-pulse-soft" />
-      <div className="orb orb-gold w-[400px] h-[400px] -right-32 bottom-1/4 animate-pulse-soft" style={{ animationDelay: "1.5s" }} />
+      <div className="orb orb-blue w-[500px] h-[500px] -left-40 top-1/4 animate-pulse-soft hidden md:block" />
+      <div className="orb orb-gold w-[400px] h-[400px] -right-32 bottom-1/4 animate-pulse-soft hidden md:block" style={{ animationDelay: "1.5s" }} />
 
       <Container className="relative z-10">
         {/* Header */}

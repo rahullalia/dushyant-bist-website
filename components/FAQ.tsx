@@ -71,9 +71,9 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="relative py-24 md:py-32">
+    <section id="faq" className="relative py-24 md:py-32 overflow-hidden">
       {/* Background */}
-      <div className="orb orb-blue w-[300px] h-[300px] -right-24 top-1/3 animate-pulse-soft" />
+      <div className="orb orb-blue w-[300px] h-[300px] -right-24 top-1/3 animate-pulse-soft hidden md:block" />
 
       <Container size="md" className="relative z-10">
         {/* Header */}

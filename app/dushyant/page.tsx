@@ -89,8 +89,8 @@ export default function ContactCard() {
   return (
     <main className="min-h-screen flex items-center justify-center p-4 md:p-8">
       {/* Background */}
-      <div className="orb orb-blue w-[400px] h-[400px] -top-20 -left-20 animate-pulse-soft" />
-      <div className="orb orb-gold w-[350px] h-[350px] bottom-20 -right-20 animate-pulse-soft" style={{ animationDelay: "2s" }} />
+      <div className="orb orb-blue w-[400px] h-[400px] -top-20 -left-20 animate-pulse-soft hidden md:block" />
+      <div className="orb orb-gold w-[350px] h-[350px] bottom-20 -right-20 animate-pulse-soft hidden md:block" style={{ animationDelay: "2s" }} />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}

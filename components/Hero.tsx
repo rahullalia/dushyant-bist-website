@@ -63,11 +63,11 @@ export function Hero() {
       {/* Parallax Background Orbs */}
       <motion.div
         style={{ y: orbBlueY, x: orbBlueX }}
-        className="orb orb-blue w-[600px] h-[600px] -top-40 -left-40 animate-pulse-soft"
+        className="orb orb-blue w-[600px] h-[600px] -top-40 -left-40 animate-pulse-soft hidden md:block"
       />
       <motion.div
         style={{ y: orbGoldY, x: orbGoldX }}
-        className="orb orb-gold w-[500px] h-[500px] bottom-20 -right-40 animate-pulse-soft"
+        className="orb orb-gold w-[500px] h-[500px] bottom-20 -right-40 animate-pulse-soft hidden md:block"
       />
       <div className="absolute inset-0 grid-bg opacity-40" />
 

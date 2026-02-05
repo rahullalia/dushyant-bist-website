@@ -11,10 +11,10 @@ export function Testimonials() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="testimonials" className="relative py-24 md:py-32">
+    <section id="testimonials" className="relative py-24 md:py-32 overflow-hidden">
       {/* Background */}
-      <div className="orb orb-gold w-[350px] h-[350px] -right-32 top-1/4 animate-pulse-soft" />
-      <div className="orb orb-blue w-[250px] h-[250px] -left-24 bottom-1/4 animate-pulse-soft" style={{ animationDelay: "1.5s" }} />
+      <div className="orb orb-gold w-[350px] h-[350px] -right-32 top-1/4 animate-pulse-soft hidden md:block" />
+      <div className="orb orb-blue w-[250px] h-[250px] -left-24 bottom-1/4 animate-pulse-soft hidden md:block" style={{ animationDelay: "1.5s" }} />
 
       <Container className="relative z-10">
         {/* Header */}

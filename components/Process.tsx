@@ -64,7 +64,7 @@ export function Process() {
   return (
     <section id="process" className="relative py-24 md:py-32 overflow-hidden">
       {/* Background */}
-      <div className="orb orb-blue w-[400px] h-[400px] -left-48 top-1/2 -translate-y-1/2 animate-pulse-soft" />
+      <div className="orb orb-blue w-[400px] h-[400px] -left-48 top-1/2 -translate-y-1/2 animate-pulse-soft hidden md:block" />
 
       <Container className="relative z-10">
         {/* Header */}
