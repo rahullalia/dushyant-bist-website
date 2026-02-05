@@ -6,8 +6,10 @@ export const CONTACT = {
   subtitle: "New York State",
   phone: "(917) 200-4124",
   phoneRaw: "9172004124",
+  email: "dushyant@poweredbydbest.com", // Placeholder - update when confirmed
   instagram: "https://www.instagram.com/poweredbydbest/",
   instagramHandle: "@poweredbydbest",
+  website: "https://dushyant-rho.vercel.app",
   smsMessage: "Hi Dushyant! I found your website and would love to chat about mortgage options.",
   location: "New York State",
 } as const;
